@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Consumo Servidor 10W - Tarifa BT1</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--text:#1f2937;--muted:#6b7280;--border:#e5e7eb;--green:#10b981;--blue:#60a5fa}
+body.dark{--bg:#0f172a;--card:#111827;--text:#f9fafb;--muted:#9ca3af;--border:#374151}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+body{background:var(--bg);padding:16px;color:var(--text);transition:.25s}
+.container{max-width:420px;margin:auto}
+.nav,.card{background:var(--card);border-radius:20px;border:1px solid var(--border);box-shadow:0 4px 18px rgba(0,0,0,.06)}
+.nav{padding:14px 18px;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.toggle{border:none;background:transparent;font-size:1.35rem;cursor:pointer}
+.card{padding:22px;margin-bottom:16px}
+h1{font-size:1.4rem;margin-bottom:10px;text-align:center}.subtitle{text-align:center;color:var(--muted);margin-bottom:18px;font-size:.95rem}
+.info-box{background:var(--card);border-radius:16px;padding:16px;margin-bottom:14px;border:1px solid var(--border)}
+.label{color:var(--muted);font-size:.9rem;margin-bottom:5px}.value{font-size:1.25rem;font-weight:700}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}.result{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;text-align:center}.price{font-size:1.15rem;font-weight:700}.highlight{background:rgba(16,185,129,.08);border-color:var(--green)}
+.explain{line-height:1.7;color:var(--text);font-size:.95rem}
+.gauge-wrap{display:flex;justify-content:center;margin:6px 0 18px}.gauge{width:220px;height:110px;border-radius:220px 220px 0 0;position:relative;overflow:hidden;background:conic-gradient(from 180deg,var(--green) 0deg,var(--green) 1.44deg,var(--border) 1.44deg,var(--border) 180deg)}.gauge:after{content:'';position:absolute;left:20px;right:20px;bottom:0;height:90px;background:var(--card);border-radius:180px 180px 0 0}.needle{position:absolute;bottom:0;left:50%;width:3px;height:88px;background:var(--blue);transform:translateX(-50%) rotate(-88.56deg);transform-origin:bottom center;z-index:2}.glabel{position:absolute;left:0;right:0;bottom:18px;text-align:center;font-weight:700;z-index:3}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="nav">
+    <strong>Panel Energía</strong>
+    <button class="toggle" id="themeBtn" onclick="toggleTheme()">🌙</button>
+  </div>
+
+  <div class="card">
+    <h1>💡 Consumo Servidor</h1>
+    <p class="subtitle">Saesa, Region de Los Rios, Lanco · Tarifa BT1 </p>
+
+    <div class="gauge-wrap">
+      <div class="gauge">
+        <div class="needle"></div>
+        <div class="glabel">8W / 1000W</div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <div class="label">Tarifa estimada por kWh</div>
+      <div class="value">$221 CLP</div>
+    </div>
+
+    <div class="info-box">
+      <div class="label">Potencia del servidor</div>
+      <div class="value">8 Watts</div>
+    </div>
+
+    <div class="grid">
+      <div class="result"><h3>Por día</h3><div class="price">$42</div></div>
+      <div class="result"><h3>Por semana</h3><div class="price">$294</div></div>
+      <div class="result highlight"><h3>Por mes</h3><div class="price">$1.272</div></div>
+      <div class="result"><h3>Por año</h3><div class="price">$15.456</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h1>⏰ Timer ahorro</h1>
+    <p class="subtitle">Se apaga 2:00 AM y prende 7:00 AM</p>
+    <p class="explain">
+      El servidor se apaga <b>5 horas cada noche</b>.<br><br>
+      Por eso queda funcionando <b>19 horas al día</b>.<br><br>
+      <b>Cálculo:</b><br>
+      8W = 0.008 kW<br>
+      0.008 × 19 = <b>0.152 kWh diarios</b><br>
+      0.152 × 221 = <b>$34 diarios</b>
+    </p>
+    <div class="grid">
+      <div class="result"><h3>Día con timer</h3><div class="price">$34</div></div>
+      <div class="result"><h3>Semana</h3><div class="price">$239</div></div>
+      <div class="result highlight"><h3>Mes</h3><div class="price">$1.008</div></div>
+      <div class="result"><h3>Año</h3><div class="price">$12.264</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h1>📘 ¿Cómo se calcula?</h1>
+    <p class="explain">
+      <b>Sin timer:</b><br>
+      8W = 0.008 kW<br>
+      0.008 × 24 = <b>0.192 kWh por día</b><br>
+      0.192 × 221 = <b>$42 diarios</b><br>
+      Total mes: <b>$1.591</b><br><br>
+
+      <b>Con timer:</b><br>
+      0.01 × 19 = <b>0.19 kWh por día</b><br>
+      0.19 × 221 = <b>$42 diarios</b><br>
+      Total mes: <b>$1.259</b><br><br>
+
+      <b>Ahorro mensual:</b> $264
+    </p>
+  </div>
+</div>
+<script>
+function applyTheme(t){document.body.classList.toggle('dark',t==='dark');document.getElementById('themeBtn').textContent=t==='dark'?'☀️':'🌙';localStorage.setItem('theme',t)}
+function toggleTheme(){applyTheme(document.body.classList.contains('dark')?'light':'dark')}
+applyTheme(localStorage.getItem('theme')||'light')
+</script>
+</body>
+</html>
